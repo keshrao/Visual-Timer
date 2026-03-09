@@ -1,4 +1,0 @@
-com.rainbowtimer.test.app-androidTest-0 /Users/keshrao/Documents/Github/Visual-Timer/app/build/generated/res/resValues/androidTest/debug
-com.rainbowtimer.test.app-mergeDebugAndroidTestResources-1 /Users/keshrao/Documents/Github/Visual-Timer/app/build/intermediates/incremental/debugAndroidTest/mergeDebugAndroidTestResources/merged.dir
-com.rainbowtimer.test.app-mergeDebugAndroidTestResources-2 /Users/keshrao/Documents/Github/Visual-Timer/app/build/intermediates/incremental/debugAndroidTest/mergeDebugAndroidTestResources/stripped.dir
-com.rainbowtimer.test.app-merged_res-3 /Users/keshrao/Documents/Github/Visual-Timer/app/build/intermediates/merged_res/debugAndroidTest
