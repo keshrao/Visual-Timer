@@ -81,21 +81,27 @@ class RingTimerView @JvmOverloads constructor(
         }
         
         for (i in 0 until currentState.ringCount) {
-            val ringIndex = currentState.ringCount - 1 - i
-            val radius = centerRadius + ringGap + (ringWidth + ringGap) * i + ringWidth / 2
+            // i=0 is outermost ring, i=ringCount-1 is innermost
+            val radius = centerRadius + ringGap + (ringWidth + ringGap) * (currentState.ringCount - 1 - i) + ringWidth / 2
             
-            if (i < currentState.activeRingIndex) {
-                continue
-            } else if (i > currentState.activeRingIndex) {
-                ringPaint.color = currentState.ringColors.getOrElse(ringIndex) { Color.RED }
-                ringPaint.strokeWidth = ringWidth
-                ringPaint.alpha = 255
-                drawFullCircle(canvas, centerX, centerY, radius, ringPaint)
-            } else {
-                ringPaint.color = currentState.ringColors.getOrElse(ringIndex) { Color.RED }
-                ringPaint.strokeWidth = ringWidth
-                ringPaint.alpha = 255
-                drawSweepingArc(canvas, centerX, centerY, radius, ringWidth, currentState.sweepFraction)
+            when {
+                i < currentState.activeRingIndex -> {
+                    // Outer rings that have already depleted - don't draw
+                }
+                i == currentState.activeRingIndex -> {
+                    // Current ring being depleted - draw sweeping arc (counterclockwise from 12 o'clock)
+                    ringPaint.color = currentState.ringColors.getOrElse(i) { Color.RED }
+                    ringPaint.strokeWidth = ringWidth
+                    ringPaint.alpha = 255
+                    drawSweepingArcCounterclockwise(canvas, centerX, centerY, radius, currentState.sweepFraction)
+                }
+                else -> {
+                    // Inner rings that haven't started yet - draw full circle
+                    ringPaint.color = currentState.ringColors.getOrElse(i) { Color.RED }
+                    ringPaint.strokeWidth = ringWidth
+                    ringPaint.alpha = 255
+                    drawFullCircle(canvas, centerX, centerY, radius, ringPaint)
+                }
             }
         }
         
@@ -107,10 +113,14 @@ class RingTimerView @JvmOverloads constructor(
         canvas.drawArc(rectF, 0f, 360f, false, paint)
     }
 
-    private fun drawSweepingArc(canvas: Canvas, cx: Float, cy: Float, radius: Float, ringWidth: Float, fraction: Float) {
-        val sweepAngle = 360f * fraction
+    private fun drawSweepingArcCounterclockwise(canvas: Canvas, cx: Float, cy: Float, radius: Float, fraction: Float) {
+        // Draw arc remaining (counterclockwise from 12 o'clock)
+        // fraction = 0 means full circle (360 degrees remaining)
+        // fraction = 1 means empty (0 degrees remaining)
+        val remainingAngle = 360f * (1f - fraction)
         rectF.set(cx - radius, cy - radius, cx + radius, cy + radius)
-        canvas.drawArc(rectF, -90f, sweepAngle, false, ringPaint)
+        // Start at 12 o'clock (-90 degrees), sweep counterclockwise (negative angle)
+        canvas.drawArc(rectF, -90f, -remainingAngle, false, ringPaint)
     }
 
     private fun drawRingGaps(canvas: Canvas, cx: Float, cy: Float, radius: Float, ringWidth: Float) {
