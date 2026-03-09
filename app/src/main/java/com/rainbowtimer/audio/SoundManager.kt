@@ -130,24 +130,29 @@ class SoundManager(private val context: Context) {
     }
 
     private fun generateSoftChime(buffer: ShortArray) {
-        val frequencies = listOf(523.25, 659.25, 783.99)
-        val baseAmplitude = 0.3
+        // Bell-like frequencies (harmonics of a bell)
+        val frequencies = listOf(523.25, 1046.50, 1569.75, 2093.00)
+        val baseAmplitude = 0.4
         
         for (i in buffer.indices) {
             val t = i.toDouble() / sampleRate
             var sample = 0.0
             
-            for ((freqIndex, freq) in frequencies.withIndex()) {
-                val envelope = if (i < sampleRate / 4) {
-                    i.toDouble() / (sampleRate / 4)
-                } else if (i > buffer.size - sampleRate / 4) {
-                    (buffer.size - i).toDouble() / (sampleRate / 4)
-                } else {
-                    1.0
-                }
-                
-                val freqOffset = 1.0 + freqIndex * 0.1
-                sample += sin(2.0 * PI * freq * freqOffset * t) * envelope * baseAmplitude / frequencies.size
+            // Bell envelope with attack, sustain, and release
+            val attackTime = sampleRate * 0.01  // 10ms attack
+            val releaseTime = sampleRate * 0.5  // 500ms release
+            val envelope = when {
+                i < attackTime -> i.toDouble() / attackTime
+                i > buffer.size - releaseTime -> (buffer.size - i).toDouble() / releaseTime
+                else -> 1.0
+            }
+            
+            for ((harmIndex, freq) in frequencies.withIndex()) {
+                // Decreasing amplitude for higher harmonics (bell-like)
+                val harmonicAmplitude = baseAmplitude / (harmIndex + 1)
+                // Slightly detuned for richness
+                val detune = 1.0 + harmIndex * 0.002
+                sample += sin(2.0 * PI * freq * detune * t) * envelope * harmonicAmplitude
             }
             
             sample *= currentVolume

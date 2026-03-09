@@ -97,7 +97,7 @@ class TimerViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
     
-    fun getSecondsPerRing(): Long {
+    fun getRingDurationMillis(): Long {
         val mode = _currentMode.value ?: TimerRepository.MODE_FIXED_RINGS
         val seconds = _inputSeconds.value ?: 0
         
@@ -130,7 +130,7 @@ class TimerViewModel(application: Application) : AndroidViewModel(application) {
         repository.saveLastUsedTime(seconds)
         
         totalDurationMillis = seconds * 1000L
-        ringDurationMillis = getSecondsPerRing()
+        ringDurationMillis = getRingDurationMillis()
         
         TimerLogger.d(timerLoggerTag, "totalDurationMillis: $totalDurationMillis, ringDurationMillis: $ringDurationMillis")
         

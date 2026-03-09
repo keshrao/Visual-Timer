@@ -94,12 +94,16 @@ class SetupActivity : AppCompatActivity() {
         when (mode) {
             TimerRepository.MODE_FIXED_RINGS -> {
                 binding.modeFixedRings.setTextColor(getColor(android.R.color.black))
-                binding.modeFixedRate.setTextColor(getColor(android.R.color.darker_gray))
+                binding.modeFixedRings.setBackgroundResource(com.rainbowtimer.R.drawable.mode_selected_background)
+                binding.modeFixedRate.setTextColor(getColor(android.R.color.white))
+                binding.modeFixedRate.setBackgroundResource(0)
                 binding.modeDescription.text = "20 rings, scales to fit time"
             }
             TimerRepository.MODE_FIXED_RATE -> {
                 binding.modeFixedRate.setTextColor(getColor(android.R.color.black))
-                binding.modeFixedRings.setTextColor(getColor(android.R.color.darker_gray))
+                binding.modeFixedRate.setBackgroundResource(com.rainbowtimer.R.drawable.mode_selected_background)
+                binding.modeFixedRings.setTextColor(getColor(android.R.color.white))
+                binding.modeFixedRings.setBackgroundResource(0)
                 binding.modeDescription.text = "15 seconds per ring, max 5:00"
             }
         }

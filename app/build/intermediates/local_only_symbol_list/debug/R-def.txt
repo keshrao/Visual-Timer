@@ -4,6 +4,7 @@ drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable mode_selected_background
 drawable mode_toggle_background
+drawable mode_unselected_background
 drawable numpad_button_background
 drawable start_button_background
 id btn0

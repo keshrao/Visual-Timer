@@ -1,7 +1,11 @@
 [
     {
-        "merged": "com.rainbowtimer.app-mergeDebugResources-36:/layout/activity_timer.xml",
-        "source": "com.rainbowtimer.app-main-39:/layout/activity_timer.xml"
+        "merged": "/Users/keshrao/.gradle/daemon/8.4/com.rainbowtimer.app-mergeDebugResources-36:/layout/activity_setup.xml",
+        "source": "/Users/keshrao/.gradle/daemon/8.4/com.rainbowtimer.app-main-39:/layout/activity_setup.xml"
+    },
+    {
+        "merged": "/Users/keshrao/.gradle/daemon/8.4/com.rainbowtimer.app-mergeDebugResources-36:/layout/activity_timer.xml",
+        "source": "/Users/keshrao/.gradle/daemon/8.4/com.rainbowtimer.app-main-39:/layout/activity_timer.xml"
     },
     {
         "merged": "com.rainbowtimer.app-mergeDebugResources-36:/layout/activity_setup.xml",

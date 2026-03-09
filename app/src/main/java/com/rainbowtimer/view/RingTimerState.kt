@@ -9,36 +9,24 @@ data class RingTimerState(
     val ringColors: List<Int>
 ) {
     companion object {
-        val RAINBOW_COLORS = listOf(
-            Color.parseColor("#FF0000"),
-            Color.parseColor("#FF4500"),
-            Color.parseColor("#FF8C00"),
-            Color.parseColor("#FFD700"),
-            Color.parseColor("#9ACD32"),
-            Color.parseColor("#32CD32"),
-            Color.parseColor("#00FF00"),
-            Color.parseColor("#00FA9A"),
-            Color.parseColor("#00CED1"),
-            Color.parseColor("#00BFFF"),
-            Color.parseColor("#1E90FF"),
-            Color.parseColor("#0000FF"),
-            Color.parseColor("#8A2BE2"),
-            Color.parseColor("#9932CC"),
-            Color.parseColor("#BA55D3"),
-            Color.parseColor("#DDA0DD"),
-            Color.parseColor("#FF1493"),
-            Color.parseColor("#FF69B4"),
-            Color.parseColor("#FFC0CB")
-        )
+        // HSV rainbow: Red (0°) -> Orange -> Yellow -> Green -> Cyan -> Blue -> Violet (280°)
+        // We go from outer (red) to inner (violet)
+        private const val HUE_START = 0f      // Red
+        private const val HUE_END = 280f     // Violet
+        private const val SATURATION = 1f
+        private const val VALUE = 1f
 
         fun generateColors(ringCount: Int): List<Int> {
             if (ringCount <= 0) return emptyList()
-            if (ringCount >= RAINBOW_COLORS.size) return RAINBOW_COLORS
             
-            val step = (RAINBOW_COLORS.size - 1).toFloat() / (ringCount - 1)
+            // Generate smooth gradient from red to violet
             return (0 until ringCount).map { i ->
-                val index = (i * step).toInt().coerceIn(0, RAINBOW_COLORS.size - 1)
-                RAINBOW_COLORS[index]
+                val hue = if (ringCount == 1) {
+                    HUE_START
+                } else {
+                    HUE_START + (HUE_END - HUE_START) * i / (ringCount - 1)
+                }
+                Color.HSVToColor(floatArrayOf(hue, SATURATION, VALUE))
             }
         }
     }

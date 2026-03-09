@@ -69,8 +69,10 @@ class RingTimerView @JvmOverloads constructor(
         
         TimerLogger.d("RingTimerView", "centerX: $centerX, centerY: $centerY")
         
+        // Always calculate ring width based on 20 rings for consistent thickness
+        val maxPossibleRings = TimerConstants.MAX_RINGS
         val maxRadius = min(centerX, centerY) - centerRadius - ringGap
-        val ringWidth = (maxRadius - ringGap * (currentState.ringCount - 1)) / currentState.ringCount
+        val ringWidth = (maxRadius - ringGap * (maxPossibleRings - 1)) / maxPossibleRings
         
         TimerLogger.d("RingTimerView", "maxRadius: $maxRadius, ringWidth: $ringWidth")
         
@@ -82,6 +84,7 @@ class RingTimerView @JvmOverloads constructor(
         
         for (i in 0 until currentState.ringCount) {
             // i=0 is outermost ring, i=ringCount-1 is innermost
+            // Use currentState.ringCount for spacing but ringWidth is fixed to 20 rings
             val radius = centerRadius + ringGap + (ringWidth + ringGap) * (currentState.ringCount - 1 - i) + ringWidth / 2
             
             when {
