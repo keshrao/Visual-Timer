@@ -23,6 +23,7 @@
         android:label="Rainbow Timer"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:testOnly="true"
         android:theme="@style/Theme.RainbowTimer" >
         <activity
             android:name="com.rainbowtimer.ui.setup.SetupActivity"

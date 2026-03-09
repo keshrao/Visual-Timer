@@ -97,8 +97,6 @@ class RingTimerView @JvmOverloads constructor(
                 ringPaint.alpha = 255
                 drawSweepingArc(canvas, centerX, centerY, radius, ringWidth, currentState.sweepFraction)
             }
-            
-            drawRingGaps(canvas, centerX, centerY, radius, ringWidth)
         }
         
         drawCenterCircle(canvas)
