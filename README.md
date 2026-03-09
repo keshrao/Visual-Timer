@@ -61,7 +61,10 @@ All configurable values are in `TimerConstants.kt`:
 | MAX_RINGS | 20 | Maximum number of rings |
 | SECONDS_PER_RING_MODE2 | 15 | Seconds per ring in Mode 2 |
 | MAX_SECONDS_MODE2 | 300 | Max input in Mode 2 (5:00) |
+| MAX_INPUT_SECONDS_MODE1 | 3600 | Max input in Mode 1 (1 hour) |
+| MIN_INPUT_SECONDS | 1 | Minimum valid input |
 | ALARM_RAMP_DURATION_MS | 5000 | Volume ramp time (ms) |
+| TICK_INTERVAL_MS | 16 | Animation tick interval (ms) |
 | GAP_BETWEEN_RINGS_DP | 2 | Ring gap in dp |
 | CENTER_CIRCLE_RADIUS_DP | 8 | Center circle radius in dp |
 
