@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "com.rainbowtimer.app-mergeDebugResources-36:/layout/activity_timer.xml",
+        "source": "com.rainbowtimer.app-main-39:/layout/activity_timer.xml"
+    },
+    {
+        "merged": "com.rainbowtimer.app-mergeDebugResources-36:/layout/activity_setup.xml",
+        "source": "com.rainbowtimer.app-main-39:/layout/activity_setup.xml"
+    }
+]

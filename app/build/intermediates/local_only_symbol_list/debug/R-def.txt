@@ -1,0 +1,34 @@
+R_DEF: Internal format may change without notice
+local
+drawable ic_launcher_background
+drawable ic_launcher_foreground
+drawable mode_selected_background
+drawable mode_toggle_background
+drawable numpad_button_background
+drawable start_button_background
+id btn0
+id btn1
+id btn2
+id btn3
+id btn4
+id btn5
+id btn6
+id btn7
+id btn8
+id btn9
+id btnBackspace
+id btnClear
+id btnReset
+id btnStart
+id modeDescription
+id modeFixedRate
+id modeFixedRings
+id modeToggle
+id ringTimerView
+id timeDisplay
+layout activity_setup
+layout activity_timer
+mipmap ic_launcher
+mipmap ic_launcher_round
+style NumPadButton
+style Theme.RainbowTimer

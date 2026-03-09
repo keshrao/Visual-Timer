@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#121212"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:id="@+id/timeDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="00:00"
+        android:textSize="64sp"
+        android:textColor="#FFFFFF"
+        android:fontFamily="monospace"
+        android:letterSpacing="0.1" />
+
+    <LinearLayout
+        android:id="@+id/modeToggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:orientation="horizontal"
+        android:background="@drawable/mode_toggle_background"
+        android:padding="4dp">
+
+        <TextView
+            android:id="@+id/modeFixedRings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mode 1"
+            android:textSize="14sp"
+            android:textColor="#FFFFFF"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="8dp"
+            android:background="@drawable/mode_selected_background" />
+
+        <TextView
+            android:id="@+id/modeFixedRate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mode 2"
+            android:textSize="14sp"
+            android:textColor="#888888"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="8dp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/modeDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="20 rings, scales to fit time"
+        android:textSize="12sp"
+        android:textColor="#888888" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="24dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn1"
+                style="@style/NumPadButton"
+                android:text="1" />
+
+            <Button
+                android:id="@+id/btn2"
+                style="@style/NumPadButton"
+                android:text="2" />
+
+            <Button
+                android:id="@+id/btn3"
+                style="@style/NumPadButton"
+                android:text="3" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp">
+
+            <Button
+                android:id="@+id/btn4"
+                style="@style/NumPadButton"
+                android:text="4" />
+
+            <Button
+                android:id="@+id/btn5"
+                style="@style/NumPadButton"
+                android:text="5" />
+
+            <Button
+                android:id="@+id/btn6"
+                style="@style/NumPadButton"
+                android:text="6" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp">
+
+            <Button
+                android:id="@+id/btn7"
+                style="@style/NumPadButton"
+                android:text="7" />
+
+            <Button
+                android:id="@+id/btn8"
+                style="@style/NumPadButton"
+                android:text="8" />
+
+            <Button
+                android:id="@+id/btn9"
+                style="@style/NumPadButton"
+                android:text="9" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp">
+
+            <Button
+                android:id="@+id/btnClear"
+                style="@style/NumPadButton"
+                android:text="C"
+                android:textColor="#FF6B6B" />
+
+            <Button
+                android:id="@+id/btn0"
+                style="@style/NumPadButton"
+                android:text="0" />
+
+            <Button
+                android:id="@+id/btnBackspace"
+                style="@style/NumPadButton"
+                android:text="⌫"
+                android:textSize="24sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnStart"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginBottom="32dp"
+        android:text="Start"
+        android:textSize="24sp"
+        android:textColor="#121212"
+        android:background="@drawable/start_button_background"
+        android:enabled="false" />
+
+</LinearLayout>
