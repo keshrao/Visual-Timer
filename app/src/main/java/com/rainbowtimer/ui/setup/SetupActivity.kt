@@ -12,6 +12,7 @@ import com.rainbowtimer.R
 import com.rainbowtimer.data.TimerRepository
 import com.rainbowtimer.databinding.ActivitySetupBinding
 import com.rainbowtimer.ui.timer.TimerActivity
+import com.rainbowtimer.util.TimerLogger
 import com.rainbowtimer.viewmodel.TimerViewModel
 
 class SetupActivity : AppCompatActivity() {
@@ -107,9 +108,14 @@ class SetupActivity : AppCompatActivity() {
     private fun setupStartButton() {
         binding.btnStart.setOnClickListener {
             if (viewModel.canStart()) {
+                val seconds = viewModel.inputSeconds.value ?: 0
+                val mode = viewModel.currentMode.value ?: TimerRepository.MODE_FIXED_RINGS
+                
+                TimerLogger.d("SetupActivity", "Start clicked - seconds: $seconds, mode: $mode")
+                
                 startActivity(Intent(this, TimerActivity::class.java).apply {
-                    putExtra(TimerActivity.EXTRA_TOTAL_SECONDS, viewModel.inputSeconds.value)
-                    putExtra(TimerActivity.EXTRA_MODE, viewModel.currentMode.value)
+                    putExtra(TimerActivity.EXTRA_TOTAL_SECONDS, seconds)
+                    putExtra(TimerActivity.EXTRA_MODE, mode)
                 })
             }
         }

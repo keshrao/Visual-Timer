@@ -118,6 +118,10 @@ class TimerViewModel(application: Application) : AndroidViewModel(application) {
     
     fun startTimer() {
         val seconds = _inputSeconds.value ?: 0
+        val mode = _currentMode.value ?: TimerRepository.MODE_FIXED_RINGS
+        
+        TimerLogger.d(timerLoggerTag, "startTimer() called - seconds: $seconds, mode: $mode")
+        
         if (seconds < TimerConstants.MIN_INPUT_SECONDS) {
             TimerLogger.e(timerLoggerTag, "Cannot start timer with $seconds seconds")
             return
@@ -128,10 +132,14 @@ class TimerViewModel(application: Application) : AndroidViewModel(application) {
         totalDurationMillis = seconds * 1000L
         ringDurationMillis = getSecondsPerRing()
         
+        TimerLogger.d(timerLoggerTag, "totalDurationMillis: $totalDurationMillis, ringDurationMillis: $ringDurationMillis")
+        
         _isTimerFinished.value = false
         _isTimerRunning.value = true
         
         val ringCount = getRingCount()
+        TimerLogger.d(timerLoggerTag, "Ring count: $ringCount")
+        
         val colors = RingTimerState.generateColors(ringCount)
         
         _timerState.value = RingTimerState(
@@ -140,6 +148,8 @@ class TimerViewModel(application: Application) : AndroidViewModel(application) {
             sweepFraction = 0f,
             ringColors = colors
         )
+        
+        TimerLogger.d(timerLoggerTag, "Timer state initialized, starting coroutine")
         
         startTimeMillis = System.currentTimeMillis()
         

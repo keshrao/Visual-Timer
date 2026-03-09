@@ -45,6 +45,7 @@ class RingTimerView @JvmOverloads constructor(
     }
 
     fun setState(newState: RingTimerState) {
+        TimerLogger.d("RingTimerView", "setState called - ringCount: ${newState.ringCount}, activeRing: ${newState.activeRingIndex}, sweepFraction: ${newState.sweepFraction}")
         state = newState
         invalidate()
     }
@@ -52,7 +53,12 @@ class RingTimerView @JvmOverloads constructor(
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         
-        val currentState = state ?: return
+        TimerLogger.d("RingTimerView", "onDraw called - width: $width, height: $height")
+        
+        val currentState = state ?: run {
+            TimerLogger.d("RingTimerView", "state is null, returning")
+            return
+        }
         if (currentState.ringCount <= 0) {
             drawCenterCircle(canvas)
             return
@@ -61,8 +67,18 @@ class RingTimerView @JvmOverloads constructor(
         val centerX = width / 2f
         val centerY = height / 2f
         
+        TimerLogger.d("RingTimerView", "centerX: $centerX, centerY: $centerY")
+        
         val maxRadius = min(centerX, centerY) - centerRadius - ringGap
         val ringWidth = (maxRadius - ringGap * (currentState.ringCount - 1)) / currentState.ringCount
+        
+        TimerLogger.d("RingTimerView", "maxRadius: $maxRadius, ringWidth: $ringWidth")
+        
+        if (ringWidth <= 0 || maxRadius <= 0) {
+            TimerLogger.e("RingTimerView", "Invalid dimensions! ringWidth: $ringWidth, maxRadius: $maxRadius")
+            drawCenterCircle(canvas)
+            return
+        }
         
         for (i in 0 until currentState.ringCount) {
             val ringIndex = currentState.ringCount - 1 - i

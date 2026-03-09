@@ -5,6 +5,7 @@ import android.view.WindowManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.rainbowtimer.databinding.ActivityTimerBinding
+import com.rainbowtimer.util.TimerLogger
 import com.rainbowtimer.viewmodel.TimerViewModel
 
 class TimerActivity : AppCompatActivity() {
@@ -32,10 +33,19 @@ class TimerActivity : AppCompatActivity() {
         val totalSeconds = intent.getIntExtra(EXTRA_TOTAL_SECONDS, 0)
         val mode = intent.getIntExtra(EXTRA_MODE, 1)
         
+        TimerLogger.d("TimerActivity", "Received - totalSeconds: $totalSeconds, mode: $mode")
+        
         if (totalSeconds > 0) {
+            TimerLogger.d("TimerActivity", "Calling setInputDigits with: ${formatSeconds(totalSeconds)}")
             viewModel.setInputDigits(formatSeconds(totalSeconds))
+            
+            TimerLogger.d("TimerActivity", "Calling setMode with: $mode")
             viewModel.setMode(mode)
+            
+            TimerLogger.d("TimerActivity", "Calling startTimer")
             viewModel.startTimer()
+        } else {
+            TimerLogger.e("TimerActivity", "Invalid totalSeconds: $totalSeconds - timer not started!")
         }
     }
     
@@ -53,12 +63,18 @@ class TimerActivity : AppCompatActivity() {
     
     private fun observeViewModel() {
         viewModel.timerState.observe(this) { state ->
+            TimerLogger.d("TimerActivity", "timerState observer triggered - state: $state")
             state?.let {
                 binding.ringTimerView.setState(it)
             }
         }
         
+        viewModel.isTimerRunning.observe(this) { running ->
+            TimerLogger.d("TimerActivity", "isTimerRunning changed to: $running")
+        }
+        
         viewModel.isTimerFinished.observe(this) { finished ->
+            TimerLogger.d("TimerActivity", "isTimerFinished changed to: $finished")
             if (finished) {
             }
         }
